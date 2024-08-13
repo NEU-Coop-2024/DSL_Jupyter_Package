@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "highlight"
+version = "0.1.0"
+description = ""
+authors = ["Kevin Yang <your.email@example.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+ipython = "^7.0"
+graphviz = "^0.20"
+pillow = "^10.4.0" 
+notebook = "^7.0"
+jupyter = "^1.0"
+copier = ">=9.0.0,<10.0.0"
+jinja2-time = "*"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
