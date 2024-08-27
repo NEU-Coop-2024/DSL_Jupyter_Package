@@ -1,8 +1,6 @@
-# highlight
+# syntax_highlighting
 
-[![Github Actions Status](/workflows/Build/badge.svg)](/actions/workflows/build.yml)
-[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh//main?urlpath=lab)
-
+[![Github Actions Status](https://github.com/NEU-Coop-2024/syntax_highlighting.git/workflows/Build/badge.svg)](https://github.com/NEU-Coop-2024/syntax_highlighting.git/actions/workflows/build.yml)
 
 A JupyterLab extension.
 
@@ -15,7 +13,7 @@ A JupyterLab extension.
 To install the extension, execute:
 
 ```bash
-pip install highlight
+pip install syntax_highlighting
 ```
 
 ## Uninstall
@@ -23,7 +21,7 @@ pip install highlight
 To remove the extension, execute:
 
 ```bash
-pip uninstall highlight
+pip uninstall syntax_highlighting
 ```
 
 ## Contributing
@@ -38,7 +36,7 @@ The `jlpm` command is JupyterLab's pinned version of
 
 ```bash
 # Clone the repo to your local environment
-# Change directory to the highlight directory
+# Change directory to the syntax_highlighting directory
 # Install package in development mode
 pip install -e "."
 # Link your development version of the extension with JupyterLab
@@ -67,32 +65,12 @@ jupyter lab build --minimize=False
 ### Development uninstall
 
 ```bash
-pip uninstall highlight
+pip uninstall syntax_highlighting
 ```
 
 In development mode, you will also need to remove the symlink created by `jupyter labextension develop`
 command. To find its location, you can run `jupyter labextension list` to figure out where the `labextensions`
-folder is located. Then you can remove the symlink named `highlight` within that folder.
-
-### Testing the extension
-
-#### Frontend tests
-
-This extension is using [Jest](https://jestjs.io/) for JavaScript code testing.
-
-To execute them, execute:
-
-```sh
-jlpm
-jlpm test
-```
-
-#### Integration tests
-
-This extension uses [Playwright](https://playwright.dev/docs/intro) for the integration tests (aka user level tests).
-More precisely, the JupyterLab helper [Galata](https://github.com/jupyterlab/jupyterlab/tree/master/galata) is used to handle testing the extension in JupyterLab.
-
-More information are provided within the [ui-tests](./ui-tests/README.md) README.
+folder is located. Then you can remove the symlink named `syntax_highlighting` within that folder.
 
 ### Packaging the extension
 
