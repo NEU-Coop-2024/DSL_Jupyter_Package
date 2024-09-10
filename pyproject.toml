@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "syntax_highlighting_new"
+name = "syntax_highlighting"
 version = "0.1.0"
 description = ""
 authors = ["Kevin Yang <your.email@example.com>"]

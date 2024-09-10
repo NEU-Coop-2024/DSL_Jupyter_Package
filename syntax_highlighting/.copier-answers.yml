@@ -6,9 +6,9 @@ author_name: Kevin Yang
 has_binder: false
 has_settings: false
 kind: frontend
-labextension_name: syntax_highlighting
+labextension_name: myextension
 project_short_description: A JupyterLab extension.
-python_name: syntax_highlighting
-repository: https://github.com/NEU-Coop-2024/syntax_highlighting.git
-test: false
+python_name: myextension
+repository: https://github.com/NEU-Coop-2024/syntax_highlighting
+test: true
 

@@ -5,3 +5,5 @@ venv
 *.lock
 *.ipynb
 
+.init
+*~
