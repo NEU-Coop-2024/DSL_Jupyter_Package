@@ -20,7 +20,7 @@ build: .init syntax_highlighting/node_modules/hypl_syntax
 	chmod -x .venv/bin/activate
 
 .PHONY: run
-run: build
+run:
 	jupyter notebook --port 8888 --no-browser
 
 .PHONY: init
