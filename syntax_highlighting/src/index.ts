@@ -4,8 +4,9 @@ import {
 } from '@jupyterlab/application';
 import { Hypl } from 'hypl_syntax';
 import { INotebookTracker, NotebookPanel } from '@jupyterlab/notebook';
+//import { EditorState, EditorView } from '@codemirror/basic-setup';
 //import { CodeMirrorEditor } from '@jupyterlab/codemirror';
-//import { EditorView, basicSetup } from 'codemirror';
+import { EditorView, basicSetup } from 'codemirror';
 //import { CodeEditor } from '@jupyterlab/codeeditor';
 //import { EditorAdapter, ILSPDocumentConnectionManager, ILSPFeatureManager, IWidgetLSPAdapterTracker } from '@jupyterlab/lsp';
 //import { EditorExtensionRegistry } from '@jupyterlab/codemirror';
@@ -29,38 +30,22 @@ const plugin: JupyterFrontEndPlugin<void> = {
       panel.content.widgets.forEach((cell) => {
 
         if (cell.editor) {
-          console.log(cell.editor);
+          console.log("first cell editor", cell.editor);
         } else {
           console.log("Editor not initialized yet.");
           cell.ready.then(() => {
             console.log("Editor initialized:", cell.editor);
+            const view = new EditorView({
+              doc: "",
+              extensions: [basicSetup, Hypl()],
+              parent: cell.editor?.host
+            });
+            console.log(view);
+
+
           });
         }
 
-        //console.log(cell);
-        const codeMirrorEditor = cell.inputArea?.editorWidget.editor;
-
-        if (!codeMirrorEditor) {
-          console.log('No CodeMirror editor found for this cell.');
-          return;
-        }
-
-        // Ensure the editor host exists before attaching a new EditorView
-        // const cellEditorHost = document.querySelector(".cm-line");
-        // if (cellEditorHost) {
-        //   // Create a new EditorView for the cell, using the Hypl syntax highlighting
-        //   new EditorView({
-        //     doc: "",
-        //     extensions: [basicSetup, Hypl()],
-        //     parent: cellEditorHost
-        //   });
-
-        //   cell.addClass('hypl');
-        //   console.log(`cell.hasClass('hypl') -> ${cell.hasClass('hypl')}`);
-        //   console.log('Added class hypl and attached new EditorView!');
-        // } else {
-        //   console.log('No cell editor host found.');
-        // }
       });
     };
 
