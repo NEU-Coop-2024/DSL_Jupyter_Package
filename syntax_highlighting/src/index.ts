@@ -26,7 +26,6 @@ const plugin: JupyterFrontEndPlugin<void> = {
 
     // Function to apply syntax highlighting to all cells
     const applySyntaxHighlighting = (panel: NotebookPanel) => {
-      console.log(panel.content.widgets);
       panel.content.widgets.forEach((cell) => {
 
         if (cell.editor) {
@@ -35,8 +34,9 @@ const plugin: JupyterFrontEndPlugin<void> = {
           console.log("Editor not initialized yet.");
           cell.ready.then(() => {
             console.log("Editor initialized:", cell.editor);
+            console.log(cell.editor?.host);
             const view = new EditorView({
-              doc: "",
+              doc: cell.editor?.model.sharedModel.source,
               extensions: [basicSetup, Hypl()],
               parent: cell.editor?.host
             });
