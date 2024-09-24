@@ -23,12 +23,10 @@ const plugin: JupyterFrontEndPlugin<void> = {
     extensions.addExtension(
       Object.freeze({
         name: 'hypl_syntax',
-        // Default CodeMirror extension parameters
-        default: 2,
         factory: () =>
           // The factory will be called for every new CodeMirror editor
-          EditorExtensionRegistry.createConfigurableExtension((step: number) =>
-            Hypl({ step })
+          EditorExtensionRegistry.createConfigurableExtension(() =>
+            Hypl()
           ),
       })
     );
