@@ -3,6 +3,10 @@ name = "syntax_highlighting"
 version = "0.1.0"
 description = ""
 authors = ["Kevin Yang <your.email@example.com>"]
+packages = [
+    { include = "echo_append"}
+]
+
 
 [tool.poetry.dependencies]
 python = "^3.11"

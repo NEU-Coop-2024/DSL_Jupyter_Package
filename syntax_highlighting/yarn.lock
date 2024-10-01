@@ -1416,7 +1416,19 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@codemirror/commands@npm:^6.0.0, @codemirror/commands@npm:^6.3.3":
+"@codemirror/commands@npm:^6.0.0":
+  version: 6.6.2
+  resolution: "@codemirror/commands@npm:6.6.2"
+  dependencies:
+    "@codemirror/language": ^6.0.0
+    "@codemirror/state": ^6.4.0
+    "@codemirror/view": ^6.27.0
+    "@lezer/common": ^1.1.0
+  checksum: 4da317ff4f381c22adcf01574c7792cc7ac17ee82cef2ea3eb8f696a0f921bac05a3b94ea8cab067e2202228aecc7020f766c10d003318ab61e4f387cf4dbdd6
+  languageName: node
+  linkType: hard
+
+"@codemirror/commands@npm:^6.3.3":
   version: 6.6.1
   resolution: "@codemirror/commands@npm:6.6.1"
   dependencies:
@@ -6572,11 +6584,11 @@ __metadata:
 
 "hypl_syntax@git@github.com:NEU-Coop-2024/hypl_syntax.git":
   version: 0.0.1
-  resolution: "hypl_syntax@git@github.com:NEU-Coop-2024/hypl_syntax.git#commit=f222c6fd7eba684f6f941d2f70fe73f9111370bf"
+  resolution: "hypl_syntax@git@github.com:NEU-Coop-2024/hypl_syntax.git#commit=6ba44b41e31a02dca55fac32587618e81dd7fabf"
   dependencies:
     "@codemirror/lang-javascript": ^6.2.2
     codemirror: ^6.0.1
-  checksum: 206818ae0f7e99fd709ce83e5b7c0bd51e7a3fd0b70b9fbf7e070a40053fb55e2017d6ae69f029cb8ddff0a4c95132d55b753f20167e5ebd8bcff974437a639b
+  checksum: 4fbafdc9d5f1cf717416251fd9a882d52b0b5a254f2b652138ba5c9769044d4643ab2fca3ae3dce62708f0ef919c7019724177946c140b7d1a31d92166f098aa
   languageName: node
   linkType: hard
 
