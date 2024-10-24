@@ -17,6 +17,7 @@ notebook = "^7.0"
 jupyter = "^1.0"
 copier = ">=9.0.0,<10.0.0"
 jinja2-time = "*"
+parsimonious = "^0.10.0"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]

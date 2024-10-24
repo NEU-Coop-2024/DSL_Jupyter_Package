@@ -9,3 +9,5 @@ This will install dependencies, build and install the extension, and run the not
 
 
 After downloading the repository, you can build and run each time with the `make run` command. If you need to refresh the github dependencies, run `make clean` first.
+
+This repo also requires the installation of jupyter-tikz: https://pypi.org/project/jupyter-tikz/

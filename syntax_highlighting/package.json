@@ -58,6 +58,7 @@
     "dependencies": {
         "@codemirror/basic-setup": "^0.20.0",
         "@jupyterlab/application": "^4.0.0",
+        "@jupyterlab/latex": "^4.3.0",
         "d3": "^7.9.0",
         "hypl_syntax": "git@github.com:NEU-Coop-2024/hypl_syntax.git"
     },
