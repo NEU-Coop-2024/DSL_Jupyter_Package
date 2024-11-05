@@ -1,12 +1,19 @@
-\documentclass[tikz,border=3mm]{standalone}
-\begin{document}
-\begin{tikzpicture}[>=stealth]
-  \node[draw, circle] (U) at (0,0.0) {U};
-  \node[draw, circle] (V) at (0,-1.5) {V};
-  \node[draw, circle] (W) at (0,-3.0) {W};
-  \draw[->] (V) -- (U) node[midway, right] {(pop1)};
-  \draw[->] (V) -- (W) node[midway, right] {(pop2)};
-  \node[draw, rectangle, fit={(U)(V)}, inner sep=0.3cm, label=above:{(pop1)}] (plate(pop1)) {};
-  \node[draw, rectangle, fit={(W)(V)}, inner sep=0.3cm, label=above:{(pop2)}] (plate(pop2)) {};
+
+\usetikzlibrary{positioning, fit, graphs, decorations.pathreplacing}
+\begin{tikzpicture}[>=stealth, node distance=2.5cm, scale=1.5, every node/.style={transform shape, draw, circle, minimum size=1.2cm}]
+  \node (E) {E};
+  \coordinate (prev_level) at (E.south);
+  \node[below=of prev_level] (L) {L};
+  \coordinate (prev_level) at (L.south);
+  \node[right=of L] (O) {O};
+  \node[below=of prev_level] (P) {P};
+  \coordinate (prev_level) at (P.south);
+  \draw[->] (O) -- (P);
+  \draw[->] (O) -- (P);
+  \draw[->] (O) -- (P);
+  \draw[->] (L) -- (O);
+  \draw[->] (E) -- (L);
+  \draw[->] (E) -- (P);
+  \draw[->] (L) -- (P);
 \end{tikzpicture}
 \end{document}

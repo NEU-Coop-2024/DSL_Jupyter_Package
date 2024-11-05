@@ -1,6 +1,9 @@
 from IPython.core.magic import Magics, magics_class, cell_magic
-from parsimonious import Grammar
 from IPython import get_ipython
+import graphviz
+import datetime
+from IPython.display import Image, display
+from parsimonious import Grammar
 
 grammar = Grammar("""
 prog = decl+ hyp+
@@ -50,44 +53,33 @@ class EchoMagics(Magics):
     @cell_magic
     def echo_append(self, line, cell):
         parsed = grammar.parse(cell.strip())
+        
         graph_data = get_graph(parsed)
-
-        tikz_code = """\\usetikzlibrary{positioning, fit}\n\\begin{tikzpicture}[>=stealth] """
         
-        #create first node
-        if graph_data['nodes']:
-            first_node = graph_data['nodes'][0]
-            tikz_code += f'  \\node[draw, circle] ({first_node}) {{{first_node}}};\n'
+        # Create DOT format
+        dot_string = "digraph G {\n"
 
-            #place all other nodes
-            if len(graph_data['nodes']) > 1:
-                second_node = graph_data['nodes'][1]
-                tikz_code += f'  \\node[draw, circle, below=of {first_node}] ({second_node}) {{{second_node}}};\n'
+        node_labels = {node: [] for node in graph_data['nodes']}
 
-            for i in range(2, len(graph_data['nodes'])):
-                previous_node = graph_data['nodes'][i - 1]
-                current_node = graph_data['nodes'][i]
-                tikz_code += f'  \\node[draw, circle, right=of {previous_node}] ({current_node}) {{{current_node}}};\n'
-
-        #edges added
         for edge in graph_data['edges']:
-            from_node, to_node, htype = edge
-            tikz_code += f'  \\draw[->] ({from_node}) -- ({to_node});\n'
+            node_labels[edge[0]].append(edge[2])  
 
-        tikz_code += "\\end{tikzpicture}\n\\end{document}"
+        for node, labels in node_labels.items():
+            combined_label = f"{node} ({', '.join(labels)})" if labels else node
+            dot_string += f'    "{node}" [label="{combined_label}"];\n'
 
-        #write code to tex file
-        tex_filename = "graph_diagram.tex"
-        with open(tex_filename, 'w') as tex_file:
-            tex_file.write(tikz_code)
+        for edge in graph_data['edges']:
+            dot_string += f'    "{edge[0]}" -> "{edge[1]}";\n'
+
+        dot_string += "}"
         
-        #read tex file
-        with open(tex_filename, 'r') as tex_file:
-            tex_contents = tex_file.read()
-
-        #create new cell and exec code
-        new_cell_code = f"%%tikz\n{tex_contents}"
-        get_ipython().run_cell(new_cell_code)
+        # Use graphviz to render the DOT string
+        dot = graphviz.Source(dot_string)
+        output_filename = dot.render(filename=f'graph', format='png')
+        
+        # Display the graph image
+        display(Image(filename=output_filename))
+        print(f"Graph data: {graph_data}")
 
 # Load the magic into the IPython environment
 def load_ipython_extension(ipython):
