@@ -1,6 +1,0 @@
-digraph G {
-    "E" [label="E"];
-    "L" [label="L"];
-    "P" [label="P"];
-    "O" [label="O"];
-}

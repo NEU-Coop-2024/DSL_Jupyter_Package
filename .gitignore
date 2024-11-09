@@ -5,3 +5,8 @@ venv
 *.lock
 .init
 *~
+.ipynb_checkpoints
+graph
+echo_append/__pycache__
+graph.png
+.ipynb_checkpoints

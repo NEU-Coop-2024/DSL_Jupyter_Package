@@ -3,13 +3,8 @@ from IPython import get_ipython
 import graphviz
 import datetime
 from IPython.display import Image, display
-from parsimonious import Grammar
-from helical import init
-import sys
-sys.path.insert(0, '/home/kyang/syntax_highlighting/.venv/src')
 from helical.hypl import parser
-from helical.hypl.parser import HyPLVisitor
-from helical import cgm
+from helical import cgm, init, hypl
 
 init('sqlite', ':memory:', create_db=True)
 
@@ -22,23 +17,19 @@ class EchoMagics(Magics):
     @cell_magic
     def echo_append(self, line, cell):
         parsed = parser.grammar.parse(cell.strip())
-        ast = HyPLVisitor().visit(parsed)
-
-        model = cgm.Model(ast)
-
+        program = parser.HyPLVisitor().visit(parsed)
+        model = cgm.Model(program)
+                
         # Create DOT format
         dot_string = "digraph G {\n"
 
+        
         for node, labels in model.reps.items():
-            if labels:
-                combined_label = f"{node.to_concrete_syntax()} ({', '.join(labels)})" 
-            else :
-                combined_label = node
+            combined_label = f"{node.to_concrete_syntax()} ({', '.join([l.to_concrete_syntax() for l in labels])})" if labels else node
             dot_string += f'    "{node.to_concrete_syntax()}" [label="{combined_label}"];\n'
 
         for edge in model.edges:
-            assert isinstance(edge, cgm.DirectCause)
-            dot_string += f'    "{edge.cause}" -> "{edge.effect}";\n'
+            dot_string += f'    "{edge.cause.to_concrete_syntax()}" -> "{edge.effect.to_concrete_syntax()}";\n'
 
         dot_string += "}"
         
@@ -48,6 +39,7 @@ class EchoMagics(Magics):
         
         # Display the graph image
         display(Image(filename=output_filename))
+        print(f"Graph data: {model}")
 
 # Load the magic into the IPython environment
 def load_ipython_extension(ipython):

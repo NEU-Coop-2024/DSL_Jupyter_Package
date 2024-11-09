@@ -7,17 +7,15 @@ packages = [
     { include = "echo_append"}
 ]
 
-
 [tool.poetry.dependencies]
 python = "3.11.x"
 ipython = "^7.0"
-graphviz = "^0.20"
-pillow = "^10.4.0" 
+graphviz = "*"
 notebook = "^7.0"
-jupyter = "^1.0"
+jupyter = "*"
 jinja2-time = "*"
-parsimonious = "^0.10.0"
-helical = {git = "git@github.com:etosch/emergency.git"}
+jupyter-tikz = "*"
+helical = {git = "ssh://git@github.com/etosch/emergency.git"}
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
