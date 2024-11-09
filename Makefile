@@ -9,10 +9,10 @@ syntax_highlighting/node_modules/hypl_syntax:
 
 .PHONY: clean
 clean:
-	cd syntax_highlighting && jlpm remove hypl_syntax
+	cd syntax_highlighting && jlpm remove hypl_syntax 
 
 .PHONY: build .venv
-build: .init syntax_highlighting/node_modules/hypl_syntax
+build: .init syntax_highlighting/node_modules/hypl_syntax 
 	chmod +x .venv/bin/activate
 	.venv/bin/activate
 	pip install -ve syntax_highlighting

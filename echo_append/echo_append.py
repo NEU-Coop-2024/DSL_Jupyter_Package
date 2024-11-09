@@ -4,45 +4,14 @@ import graphviz
 import datetime
 from IPython.display import Image, display
 from parsimonious import Grammar
+from helical import init
+import sys
+sys.path.insert(0, '/home/kyang/syntax_highlighting/.venv/src')
+from helical.hypl import parser
+from helical.hypl.parser import HyPLVisitor
+from helical import cgm
 
-grammar = Grammar("""
-prog = decl+ hyp+
-decl = var whitespace ":" whitespace "num" whitespace
-htype = "(" whitespace ~r"[a-z]+[0-9a-zA-Z_]*" whitespace ")" whitespace
-causal = var whitespace "<-" whitespace var whitespace 
-hyp = htype causal
-var = ~r"[A-Z]+[0-9a-zA-Z_]*"
-
-whitespace = ~r"\s*"
-""")
-
-def get_graph(obj):
-    graph = {'nodes' : [], 'edges' : []}
-    for child in obj.children:
-        if child.expr_name == "hyp":
-            htype = child.children[0].text
-            causal = child.children[1]
-            lhs, tos, froms = True, [], []
-
-            for kid in causal.children:
-                if kid.text == "<-":
-                    lhs = False 
-                    continue
-                if lhs and kid.expr_name == "var":
-                    tos.append(kid.text)
-                if not lhs and kid.expr_name == "var":
-                    froms.append(kid.text)
-            
-            for from_node in froms:
-                for to_node in tos:
-                    graph['edges'].append((from_node, to_node, htype))
-        elif child.expr_name == "var":
-            graph['nodes'].append(child.text)
-        else:
-            g = get_graph(child)
-            graph['nodes'].extend(g['nodes'])
-            graph['edges'].extend(g['edges'])
-    return graph
+init('sqlite', ':memory:', create_db=True)
 
 @magics_class
 class EchoMagics(Magics):
@@ -52,24 +21,24 @@ class EchoMagics(Magics):
 
     @cell_magic
     def echo_append(self, line, cell):
-        parsed = grammar.parse(cell.strip())
-        
-        graph_data = get_graph(parsed)
-        
+        parsed = parser.grammar.parse(cell.strip())
+        ast = HyPLVisitor().visit(parsed)
+
+        model = cgm.Model(ast)
+
         # Create DOT format
         dot_string = "digraph G {\n"
 
-        node_labels = {node: [] for node in graph_data['nodes']}
+        for node, labels in model.reps.items():
+            if labels:
+                combined_label = f"{node.to_concrete_syntax()} ({', '.join(labels)})" 
+            else :
+                combined_label = node
+            dot_string += f'    "{node.to_concrete_syntax()}" [label="{combined_label}"];\n'
 
-        for edge in graph_data['edges']:
-            node_labels[edge[0]].append(edge[2])  
-
-        for node, labels in node_labels.items():
-            combined_label = f"{node} ({', '.join(labels)})" if labels else node
-            dot_string += f'    "{node}" [label="{combined_label}"];\n'
-
-        for edge in graph_data['edges']:
-            dot_string += f'    "{edge[0]}" -> "{edge[1]}";\n'
+        for edge in model.edges:
+            assert isinstance(edge, cgm.DirectCause)
+            dot_string += f'    "{edge.cause}" -> "{edge.effect}";\n'
 
         dot_string += "}"
         
@@ -79,7 +48,6 @@ class EchoMagics(Magics):
         
         # Display the graph image
         display(Image(filename=output_filename))
-        print(f"Graph data: {graph_data}")
 
 # Load the magic into the IPython environment
 def load_ipython_extension(ipython):

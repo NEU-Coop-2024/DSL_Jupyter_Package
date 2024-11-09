@@ -1,11 +1,6 @@
 digraph G {
-    "E" [label="E ((machines) )"];
-    "L" [label="L ((programs) )"];
+    "E" [label="E"];
+    "L" [label="L"];
     "P" [label="P"];
-    "O" [label="O ((machines) , (programs) , (compilers) )"];
-    "O" -> "P";
-    "O" -> "P";
-    "O" -> "P";
-    "E" -> "P";
-    "L" -> "P";
+    "O" [label="O"];
 }
