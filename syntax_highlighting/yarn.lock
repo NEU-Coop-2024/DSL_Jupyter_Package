@@ -6697,11 +6697,11 @@ __metadata:
 
 "hypl_syntax@git@github.com:NEU-Coop-2024/hypl_syntax.git":
   version: 0.0.1
-  resolution: "hypl_syntax@git@github.com:NEU-Coop-2024/hypl_syntax.git#commit=5051a43ba5daaad457942f8bd7a2937327a663ca"
+  resolution: "hypl_syntax@git@github.com:NEU-Coop-2024/hypl_syntax.git#commit=87fe8a868eba75db4af10b535ecbca5be2734125"
   dependencies:
     "@codemirror/lang-javascript": ^6.2.2
     codemirror: ^6.0.1
-  checksum: 4fdeb91a4cae7341e3679a02992fadf57dce9f38a7091a80c22c1b926fd4bea16026124faaa74405dd9faecfcc4ac9cf3e8f53d5a782fb07c9cc712b11e69498
+  checksum: 687585ea598151abb9bf32667a5a205ec336ba4978e56fd10fe201594f3d4c0a9a465dea56bafe05876d21e9b24da9bf63b8aa776364de4d13b67fc3c3476330
   languageName: node
   linkType: hard
 

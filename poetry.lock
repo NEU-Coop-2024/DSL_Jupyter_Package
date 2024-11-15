@@ -563,7 +563,7 @@ pyyaml = "5.3"
 type = "git"
 url = "ssh://git@github.com/etosch/emergency.git"
 reference = "HEAD"
-resolved_reference = "597b8c47c8f79940f63d4efb08a7e01d9e50416f"
+resolved_reference = "fae8ceaa1137773fe673b67a01c41487a343bbf4"
 
 [[package]]
 name = "httpcore"

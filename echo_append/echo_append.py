@@ -29,7 +29,7 @@ class EchoMagics(Magics):
             dot_string += f'    "{node.to_concrete_syntax()}" [label="{combined_label}"];\n'
 
         for edge in model.edges:
-            dot_string += f'    "{edge.cause.to_concrete_syntax()}" -> "{edge.effect.to_concrete_syntax()}";\n'
+            dot_string += f'    "{edge.effect.to_concrete_syntax()}" -> "{edge.cause.to_concrete_syntax()}";\n'
 
         dot_string += "}"
         
@@ -44,3 +44,4 @@ class EchoMagics(Magics):
 # Load the magic into the IPython environment
 def load_ipython_extension(ipython):
     ipython.register_magics(EchoMagics)
+    
