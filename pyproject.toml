@@ -2,20 +2,18 @@
 name = "syntax_highlighting"
 version = "0.1.0"
 description = ""
-authors = ["Kevin Yang <your.email@example.com>"]
+authors = ["Example <your.email@example.com>"]
 packages = [
-    { include = "echo_append"}
+    { include = "cell_magic"}
 ]
 
 [tool.poetry.dependencies]
-python = "3.11.x"
+python = "3.12.x"
 ipython = "^7.0"
-graphviz = "*"
 notebook = "^7.0"
 jupyter = "*"
 jinja2-time = "*"
 jupyter-tikz = "*"
-helical = {git = "ssh://git@github.com/etosch/emergency.git"}
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]

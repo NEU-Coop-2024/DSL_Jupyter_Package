@@ -3,20 +3,20 @@ import { JupyterFrontEnd, JupyterFrontEndPlugin } from "@jupyterlab/application"
 import { EditorExtensionRegistry, IEditorExtensionRegistry } from "@jupyterlab/codemirror";
 import { EditorState } from "@codemirror/state";
 import { python } from "@codemirror/lang-python";
-import { Hypl } from "hypl_syntax";
+import { Lang } from "./main";
 
 const languageConf = new Compartment();
 
 const autoLanguage = EditorState.transactionExtender.of((tr) => {
   if (!tr.docChanged) return null;
-  const docIsHypl = /^\s*%%echo_append/.test(tr.newDoc.sliceString(0, 100)); // checking for magic
+  const docIsHypl = /^\s*%%cell_magic/.test(tr.newDoc.sliceString(0, 100)); // checking for magic
   return {
-    effects: languageConf.reconfigure(docIsHypl ? Hypl() : python()), // choose hypl or python based on cell magic
+    effects: languageConf.reconfigure(docIsHypl ? Lang() : python()), // choose hypl or python based on cell magic
   };
 });
 
 
-function hyplSyntaxExtension(): Extension {
+function langSyntaxExtension(): Extension {
   return [languageConf.of(python()), autoLanguage];
 }
 
@@ -32,10 +32,10 @@ const plugin: JupyterFrontEndPlugin<void> = {
     // Register the editor extension
     extensions.addExtension(
       Object.freeze({
-        name: "hypl_syntax",
+        name: "custom_syntax",
         factory: () =>
           // The factory is called for every new CodeMirror editor
-          EditorExtensionRegistry.createConfigurableExtension(() => hyplSyntaxExtension())
+          EditorExtensionRegistry.createConfigurableExtension(() => langSyntaxExtension())
       })
     );
   },

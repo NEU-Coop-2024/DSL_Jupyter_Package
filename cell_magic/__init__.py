@@ -1,0 +1,1 @@
+from .cell_magic import load_ipython_extension

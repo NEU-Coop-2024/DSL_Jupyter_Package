@@ -7,10 +7,6 @@
         "jupyterlab",
         "jupyterlab-extension"
     ],
-    "homepage": "https://github.com/NEU-Coop-2024/syntax_highlighting",
-    "bugs": {
-        "url": "https://github.com/NEU-Coop-2024/syntax_highlighting/issues"
-    },
     "license": "BSD-3-Clause",
     "author": {
         "name": "Kevin Yang",
@@ -24,10 +20,6 @@
     "main": "lib/index.js",
     "types": "lib/index.d.ts",
     "style": "style/index.css",
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/NEU-Coop-2024/syntax_highlighting.git"
-    },
     "scripts": {
         "build": "jlpm build:lib && jlpm build:labextension:dev",
         "build:prod": "jlpm clean && jlpm build:lib:prod && jlpm build:labextension",
@@ -57,10 +49,13 @@
     },
     "dependencies": {
         "@codemirror/basic-setup": "^0.20.0",
+        "@codemirror/lang-python": "^6.1.7",
+        "@codemirror/language": "^6.10.8",
+        "@codemirror/state": "^6.5.1",
         "@jupyterlab/application": "^4.0.0",
         "@jupyterlab/latex": "^4.3.0",
-        "d3": "^7.9.0",
-        "hypl_syntax": "git@github.com:NEU-Coop-2024/hypl_syntax.git"
+        "codemirror": "^6.0.1",
+        "d3": "^7.9.0"
     },
     "devDependencies": {
         "@jupyterlab/builder": "^4.0.0",
